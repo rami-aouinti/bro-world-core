@@ -19,15 +19,17 @@
     }
   },
   "require": {
-    "php": ">=8.3",
+    "php": ">=8.2",
     "symfony/framework-bundle": "^7.2",
     "symfony/config": "^7.2",
-    "doctrine/orm": "^3.0",
-    "ramsey/uuid": "^4.7",
-    "ramsey/uuid-doctrine": "^2.4",
     "symfony/serializer": "^7.2",
     "symfony/validator": "^7.2",
-    "symfony/messenger": "^7.2"
+    "symfony/messenger": "^7.2",
+    "ramsey/uuid": "^4.6",
+    "ramsey/uuid-doctrine": "^2.1"
+  },
+  "suggest": {
+    "doctrine/orm": "^2.14 || ^3.0"
   },
   "support": {
     "issues": "https://github.com/rami-aouinti/bro-world-core/issues"
