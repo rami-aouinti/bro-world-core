@@ -9,7 +9,8 @@
     }
   },
   "require": {
-    "php": ">=8.3",
-    "symfony/framework-bundle": "^7.0"
+    "php": ">=8.2",
+    "symfony/framework-bundle": "^7.0",
+    "symfony/config": "^7.0"
   }
 }
