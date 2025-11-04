@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
-use Bro\WorldCoreBundle\Service\Clock;
 
 return static function (ContainerConfigurator $container): void {
     /** @var ServicesConfigurator $services */
@@ -21,5 +20,4 @@ return static function (ContainerConfigurator $container): void {
             dirname(__DIR__, 2) . '/Tests',
         ]);
 
-    $services->set(Clock::class);
 };

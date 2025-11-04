@@ -2,15 +2,34 @@
   "name": "bro-world/core-bundle",
   "description": "Core utilities & services for Bro World projects",
   "type": "symfony-bundle",
+  "homepage": "https://github.com/rami-aouinti/bro-world-core",
+  "version": "v1.0.0",
   "license": "proprietary",
+  "authors": [
+    {
+      "name": "Rami Aouinti",
+      "email": "rami.aouinti@gmail.com",
+      "homepage": "https://github.com/rami-aouinti",
+      "role": "Developer"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Bro\\WorldCoreBundle\\": "src/"
     }
   },
   "require": {
-    "php": ">=8.2",
-    "symfony/framework-bundle": "^7.0",
-    "symfony/config": "^7.0"
+    "php": ">=8.3",
+    "symfony/framework-bundle": "^7.2",
+    "symfony/config": "^7.2",
+    "doctrine/orm": "^3.0",
+    "ramsey/uuid": "^4.7",
+    "ramsey/uuid-doctrine": "^2.4",
+    "symfony/serializer": "^7.2",
+    "symfony/validator": "^7.2",
+    "symfony/messenger": "^7.2"
+  },
+  "support": {
+    "issues": "https://github.com/rami-aouinti/bro-world-core/issues"
   }
 }
