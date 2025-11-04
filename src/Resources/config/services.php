@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Bro\WorldCoreBundle\Infrastructure\Service\LexikJwtAuthenticatorService;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 
@@ -20,4 +21,6 @@ return static function (ContainerConfigurator $container): void {
             dirname(__DIR__, 2) . '/Tests',
         ]);
 
+    $services->set(LexikJwtAuthenticatorService::class)
+        ->arg('$path', param('bro_world_core.jwt_public_key'));
 };

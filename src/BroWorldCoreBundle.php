@@ -17,6 +17,7 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->children()
             ->scalarNode('default_locale')->defaultValue('fr')->end()
             ->booleanNode('enable_feature_x')->defaultFalse()->end()
+            ->scalarNode('jwt_public_key')->defaultNull()->end()
             ->end();
     }
 
@@ -26,5 +27,6 @@ final class BroWorldCoreBundle extends AbstractBundle
 
         $container->parameters()->set('bro_world_core.default_locale', $config['default_locale'] ?? 'fr');
         $container->parameters()->set('bro_world_core.enable_feature_x', $config['enable_feature_x'] ?? false);
+        $container->parameters()->set('bro_world_core.jwt_public_key', $config['jwt_public_key'] ?? null);
     }
 }
