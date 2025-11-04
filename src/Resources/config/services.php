@@ -26,5 +26,5 @@ return static function (ContainerConfigurator $container): void {
     $services->set(ExceptionSubscriber::class)
         ->arg('$environment', '%kernel.environment%');
     $services->set(LexikJwtAuthenticatorService::class)
-        ->arg('$path', param('bro_world_core.jwt_public_key'));
+        ->arg('$path', '%bro_world_core.security.secured_path_regex%');
 };
