@@ -21,32 +21,48 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->arrayNode('security')
             ->addDefaultsIfNotSet()
             ->children()
-            ->scalarNode('secured_path_regex')->defaultValue('^/api/(?!.*(security)|(test)|(doc)).*$')->end()
+            ->scalarNode('secured_path_regex')
+            ->defaultValue('^/api/(?!.*(security)|(test)|(doc)).*$')
             ->end()
             ->end()
+            ->end()
+            ->arrayNode('messenger')
+            ->addDefaultsIfNotSet()
             ->children()
-            ->arrayNode('messenger')->addDefaultsIfNotSet()->children()
-            ->arrayNode('failed_retry')->addDefaultsIfNotSet()->children()
+            ->arrayNode('failed_retry')
+            ->addDefaultsIfNotSet()
+            ->children()
             ->booleanNode('is_retryable')->defaultFalse()->end()
             ->integerNode('waiting_time')->min(0)->defaultValue(0)->end()
-            ->end()->end()
             ->end()
-            ->end();
+            ->end()
+            ->end()
+            ->end()
+            ->end()
+        ;
     }
 
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $container->import(__DIR__.'/Resources/config/services.php');
+        $container->import(__DIR__ . '/Resources/config/services.php');
 
         // paramètres exposés
         $container->parameters()->set('bro_world_core.default_locale', $config['default_locale'] ?? 'fr');
         $container->parameters()->set('bro_world_core.enable_feature_x', $config['enable_feature_x'] ?? false);
         $container->parameters()->set('bro_world_core.jwt_public_key', $config['jwt_public_key'] ?? null);
+
         $container->parameters()->set(
             'bro_world_core.security.secured_path_regex',
             $config['security']['secured_path_regex'] ?? '^/api/(?!.*(security)|(test)|(doc)).*$'
         );
-        $container->parameters()->set('bro_world_core.messenger.failed_retry.is_retryable', $config['messenger']['failed_retry']['is_retryable'] ?? false);
-        $container->parameters()->set('bro_world_core.messenger.failed_retry.waiting_time', $config['messenger']['failed_retry']['waiting_time'] ?? 0);
+
+        $container->parameters()->set(
+            'bro_world_core.messenger.failed_retry.is_retryable',
+            $config['messenger']['failed_retry']['is_retryable'] ?? false
+        );
+        $container->parameters()->set(
+            'bro_world_core.messenger.failed_retry.waiting_time',
+            $config['messenger']['failed_retry']['waiting_time'] ?? 0
+        );
     }
 }
