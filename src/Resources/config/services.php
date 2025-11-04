@@ -6,6 +6,8 @@ use Bro\WorldCoreBundle\Infrastructure\Service\LexikJwtAuthenticatorService;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
+
 return static function (ContainerConfigurator $container): void {
     /** @var ServicesConfigurator $services */
     $services = $container->services();
