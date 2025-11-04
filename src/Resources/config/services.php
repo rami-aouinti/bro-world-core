@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Bro\WorldCoreBundle\Infrastructure\Service\LexikJwtAuthenticatorService;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
+use Bro\WorldCoreBundle\Transport\EventSubscriber\ExceptionSubscriber;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 
@@ -22,7 +23,8 @@ return static function (ContainerConfigurator $container): void {
             dirname(__DIR__, 2) . '/Resources',
             dirname(__DIR__, 2) . '/Tests',
         ]);
-
+    $services->set(ExceptionSubscriber::class)
+        ->arg('$environment', '%kernel.environment%');
     $services->set(LexikJwtAuthenticatorService::class)
         ->arg('$path', param('bro_world_core.jwt_public_key'));
 };
