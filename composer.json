@@ -1,0 +1,15 @@
+{
+  "name": "bro-world/core-bundle",
+  "description": "Core utilities & services for Bro World projects",
+  "type": "symfony-bundle",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "Bro\\WorldCoreBundle\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=8.3",
+    "symfony/framework-bundle": "^7.0"
+  }
+}
