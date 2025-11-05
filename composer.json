@@ -1,36 +1,41 @@
 {
-  "name": "bro-world/core-bundle",
-  "description": "Core utilities & services for Bro World projects",
-  "type": "symfony-bundle",
-  "homepage": "https://github.com/rami-aouinti/bro-world-core",
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "Rami Aouinti",
-      "email": "rami.aouinti@gmail.com",
-      "homepage": "https://github.com/rami-aouinti",
-      "role": "Developer"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Bro\\WorldCoreBundle\\": "src/"
-    }
-  },
-  "require": {
-    "php": ">=8.2",
-    "symfony/framework-bundle": "^7.2",
-    "symfony/config": "^7.2",
-    "symfony/serializer": "^7.2",
-    "symfony/validator": "^7.2",
-    "symfony/messenger": "^7.2",
-    "ramsey/uuid": "^4.6",
-    "ramsey/uuid-doctrine": "^2.1"
-  },
-  "suggest": {
-    "doctrine/orm": "^2.14 || ^3.0"
-  },
-  "support": {
-    "issues": "https://github.com/rami-aouinti/bro-world-core/issues"
-  }
+	"name": "bro-world/core-bundle",
+	"description": "Core utilities & services for Bro World projects",
+	"type": "symfony-bundle",
+	"homepage": "https://github.com/rami-aouinti/bro-world-core",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Rami Aouinti",
+			"email": "rami.aouinti@gmail.com",
+			"homepage": "https://github.com/rami-aouinti",
+			"role": "Developer"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Bro\\WorldCoreBundle\\": "src/"
+		}
+	},
+	"require": {
+		"php": ">=8.2",
+		"symfony/framework-bundle": "^7.2",
+		"symfony/config": "^7.2",
+		"symfony/serializer": "^7.2",
+		"symfony/validator": "^7.2",
+		"symfony/messenger": "^7.2",
+		"ramsey/uuid": "^4.6",
+		"ramsey/uuid-doctrine": "^2.1"
+	},
+	"suggest": {
+		"doctrine/orm": "^2.14 || ^3.0"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.1.x-dev"
+		}
+	},
+	"support": {
+		"issues": "https://github.com/rami-aouinti/bro-world-core/issues"
+	}
 }
