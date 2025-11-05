@@ -1,5 +1,4 @@
 services:
-
     nginx:
       image: nginx:latest
       build:
@@ -25,8 +24,8 @@ services:
         context: .
         args:
           BUILD_ARGUMENT_ENV: dev
-          HOST_UID: ${HOST_UID}
-          HOST_GID: ${HOST_GID}
+          HOST_UID: ${UID:-1000}
+          HOST_GID: ${GID:-1000}
         dockerfile: ./Dockerfile
       container_name: ${COMPOSE_PROJECT_NAME}-symfony
       expose:
