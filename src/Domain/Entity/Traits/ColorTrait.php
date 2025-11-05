@@ -7,7 +7,6 @@ namespace Bro\WorldCoreBundle\Domain\Entity\Traits;
 use Bro\WorldCoreBundle\Application\Export\Annotation\Expose;
 use Bro\WorldCoreBundle\Application\Validator\Constraints\HexColor;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
@@ -20,8 +19,6 @@ trait ColorTrait
      * The assigned color in HTML hex format, e.g. #dd1d00
      */
     #[ORM\Column(name: 'color', type: 'string', length: 36, nullable: true)]
-    #[Serializer\Expose]
-    #[Serializer\Groups(['Default'])]
     #[Expose(label: 'color')]
     #[HexColor]
     private ?string $color = null;
