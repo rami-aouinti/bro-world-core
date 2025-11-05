@@ -85,6 +85,7 @@ final class LexikJwtAuthenticatorService implements AuthenticatorServiceInterfac
         try {
             $payload = $this->extractTokenPayloadFromRequest($event->getRequest());
             $this->userId = $this->getUserIdClaim($payload);
+            $this->id = $this->getId($payload);
         } catch (AuthenticationException $e) {
             if (preg_match($this->pathRegexp, $uri) > 0) {
                 throw $e;
@@ -111,6 +112,11 @@ final class LexikJwtAuthenticatorService implements AuthenticatorServiceInterfac
 
             throw new AuthenticationException('Invalid JWT Token');
         }
+    }
+
+    private function getId(array $payload): string
+    {
+        return $payload['id'];
     }
 
     private function getUserIdClaim(array $payload): string
