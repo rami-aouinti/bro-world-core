@@ -38,6 +38,12 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->end()
             ->end()
             ->end()
+            ->arrayNode('media')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('api_base_url')->defaultValue('')->end()
+            ->end()
+            ->end()
             ->end()
         ;
     }
@@ -46,7 +52,7 @@ final class BroWorldCoreBundle extends AbstractBundle
     {
         $container->import(__DIR__ . '/Resources/config/services.php');
 
-        // paramètres exposés
+        // exposed params
         $container->parameters()->set('bro_world_core.default_locale', $config['default_locale'] ?? 'fr');
         $container->parameters()->set('bro_world_core.enable_feature_x', $config['enable_feature_x'] ?? false);
         $container->parameters()->set('bro_world_core.jwt_public_key', $config['jwt_public_key'] ?? null);
@@ -63,6 +69,11 @@ final class BroWorldCoreBundle extends AbstractBundle
         $container->parameters()->set(
             'bro_world_core.messenger.failed_retry.waiting_time',
             $config['messenger']['failed_retry']['waiting_time'] ?? 0
+        );
+
+        $container->parameters()->set(
+            'bro_world_core.media.api_base_url',
+            $config['media']['api_base_url'] ?? ''
         );
     }
 }
