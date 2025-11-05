@@ -1,34 +1,23 @@
+version: "3.9"
 services:
-    nginx:
-      image: nginx:latest
-      build:
-        context: ./docker/
-        args:
-          BUILD_ARGUMENT_ENV: dev
-        dockerfile: ./nginx/Dockerfile
-      container_name: ${COMPOSE_PROJECT_NAME}-nginx
-      restart: always
-      ports:
-        - "80:80"
-        - "443:443"
-      volumes:
-        - ./docker/src:/var/www/html:ro,cached
-      depends_on:
-        - symfony
-      links:
-        - symfony
+    php:
+        build: ./docker/php
+        container_name: ff_php
+        volumes:
+            - ./:/var/www/html:cached
+        environment:
+            APP_ENV: dev
+            PHP_IDE_CONFIG: serverName=php
+        restart: unless-stopped
 
-    symfony: &symfony-template
-      image: symfony:latest
-      build:
-        context: .
-        args:
-          BUILD_ARGUMENT_ENV: dev
-          HOST_UID: ${UID:-1000}
-          HOST_GID: ${GID:-1000}
-        dockerfile: ./Dockerfile
-      container_name: ${COMPOSE_PROJECT_NAME}-symfony
-      expose:
-        - 9000
-      volumes:
-        - ./docker/src:/var/www/html:cached
+    nginx:
+        build: ./docker/nginx
+        container_name: ff_nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - ./:/var/www/html:ro
+        depends_on:
+            - php
+        restart: unless-stopped
+
