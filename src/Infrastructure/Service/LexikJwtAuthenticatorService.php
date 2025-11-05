@@ -68,7 +68,7 @@ final class LexikJwtAuthenticatorService implements AuthenticatorServiceInterfac
 
     public function getToken(string $id): ?string
     {
-        return $this->tokenManager->create(new SymfonyUser($id, '', '', []));
+        return $this->tokenManager->create(new SymfonyUser($id, $id, '', '', []));
     }
 
     public static function getSubscribedEvents(): array
