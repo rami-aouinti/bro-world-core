@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Bro\WorldCoreBundle\Infrastructure\Messenger\Strategy\FailedRetry;
 use Bro\WorldCoreBundle\Infrastructure\Service\ApiProxyService;
+use Bro\WorldCoreBundle\Infrastructure\Service\ElasticsearchService;
 use Bro\WorldCoreBundle\Infrastructure\Service\LexikJwtAuthenticatorService;
 use Bro\WorldCoreBundle\Transport\EventSubscriber\ExceptionSubscriber;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -34,4 +35,9 @@ return static function (ContainerConfigurator $container): void {
 
     $services->set(ApiProxyService::class)
         ->arg('$apiMediaBaseUrl', '%bro_world_core.media.api_base_url%');
+
+    $services->set(ElasticsearchService::class)
+        ->arg('$host', '%bro_world_core.elasticsearch.host%')
+        ->arg('$username', '%bro_world_core.elasticsearch.username%')
+        ->arg('$password', '%bro_world_core.elasticsearch.password%');
 };

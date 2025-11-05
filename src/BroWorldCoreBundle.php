@@ -18,6 +18,7 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->scalarNode('default_locale')->defaultValue('fr')->end()
             ->booleanNode('enable_feature_x')->defaultFalse()->end()
             ->scalarNode('jwt_public_key')->defaultNull()->end()
+
             ->arrayNode('security')
             ->addDefaultsIfNotSet()
             ->children()
@@ -26,6 +27,7 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->end()
             ->end()
             ->end()
+
             ->arrayNode('messenger')
             ->addDefaultsIfNotSet()
             ->children()
@@ -38,6 +40,7 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->end()
             ->end()
             ->end()
+
             ->arrayNode('media')
             ->addDefaultsIfNotSet()
             ->children()
@@ -75,5 +78,19 @@ final class BroWorldCoreBundle extends AbstractBundle
             'bro_world_core.media.api_base_url',
             $config['media']['api_base_url'] ?? ''
         );
+
+        $container->parameters()->set(
+            'bro_world_core.elasticsearch.host',
+            $config['elasticsearch']['host'] ?? ''
+        );
+        $container->parameters()->set(
+            'bro_world_core.elasticsearch.username',
+            $config['elasticsearch']['username'] ?? ''
+        );
+        $container->parameters()->set(
+            'bro_world_core.elasticsearch.password',
+            $config['elasticsearch']['password'] ?? ''
+        );
+
     }
 }
