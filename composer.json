@@ -3,7 +3,6 @@
   "description": "Core utilities & services for Bro World projects",
   "type": "symfony-bundle",
   "homepage": "https://github.com/rami-aouinti/bro-world-core",
-  "version": "v1.0.0",
   "license": "proprietary",
   "authors": [
     {
