@@ -28,6 +28,7 @@ use function sprintf;
 final class LexikJwtAuthenticatorService implements AuthenticatorServiceInterface, EventSubscriberInterface
 {
     private ?string $userId = null;
+    private ?string $id = null;
     private ?string $fullName = null;
     private ?string $avatar = null;
     private ?array $roles = null;
@@ -58,6 +59,7 @@ final class LexikJwtAuthenticatorService implements AuthenticatorServiceInterfac
 
         return new SymfonyUser(
             $this->userId,
+            $this->id,
             $this->fullName ?? '',
             $this->avatar ?? '',
             $this->roles ?? []
