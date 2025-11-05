@@ -47,6 +47,15 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->scalarNode('api_base_url')->defaultValue('')->end()
             ->end()
             ->end()
+
+            ->arrayNode('elasticsearch')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('host')->defaultValue('')->end()
+            ->scalarNode('username')->defaultValue('')->end()
+            ->scalarNode('password')->defaultValue('')->end()
+            ->end()
+            ->end()
             ->end()
         ;
     }
