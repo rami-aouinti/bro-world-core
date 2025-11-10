@@ -48,6 +48,37 @@ final class BroWorldCoreBundle extends AbstractBundle
             ->end()
             ->end()
 
+            ->arrayNode('api_proxy')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->arrayNode('base_urls')
+            ->useAttributeAsKey('type')
+            ->scalarPrototype()->defaultValue('')->end()
+            ->defaultValue(['media' => ''])
+            ->end()
+            ->arrayNode('upload_defaults')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('context_key_field')->defaultValue('contextKey')->end()
+            ->scalarNode('context_value')->defaultNull()->end()
+            ->scalarNode('context_id')->defaultNull()->end()
+            ->scalarNode('workplace_id')->defaultNull()->end()
+            ->scalarNode('media_folder')->defaultNull()->end()
+            ->booleanNode('private')->defaultTrue()->end()
+            ->scalarNode('files_parameter')->defaultValue('files')->end()
+            ->arrayNode('extra_fields')
+            ->normalizeKeys(false)
+            ->scalarPrototype()->end()
+            ->defaultValue([])
+            ->end()
+            ->arrayNode('headers')
+            ->normalizeKeys(false)
+            ->scalarPrototype()->end()
+            ->defaultValue([])
+            ->end()
+            ->end()
+            ->end()
+
             ->arrayNode('elasticsearch')
             ->addDefaultsIfNotSet()
             ->children()
@@ -86,6 +117,18 @@ final class BroWorldCoreBundle extends AbstractBundle
         $container->parameters()->set(
             'bro_world_core.media.api_base_url',
             $config['media']['api_base_url'] ?? ''
+        );
+
+        $baseUrls = $config['api_proxy']['base_urls'] ?? [];
+
+        if (empty($baseUrls['media']) && !empty($config['media']['api_base_url'])) {
+            $baseUrls['media'] = $config['media']['api_base_url'];
+        }
+
+        $container->parameters()->set('bro_world_core.api_proxy.base_urls', $baseUrls);
+        $container->parameters()->set(
+            'bro_world_core.api_proxy.upload_defaults',
+            $config['api_proxy']['upload_defaults'] ?? []
         );
 
         $container->parameters()->set(

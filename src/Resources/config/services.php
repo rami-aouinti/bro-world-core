@@ -34,7 +34,8 @@ return static function (ContainerConfigurator $container): void {
         ->arg('$retryWaitingTime', '%bro_world_core.messenger.failed_retry.waiting_time%');
 
     $services->set(ApiProxyService::class)
-        ->arg('$apiMediaBaseUrl', '%bro_world_core.media.api_base_url%');
+        ->arg('$baseUrls', '%bro_world_core.api_proxy.base_urls%')
+        ->arg('$uploadDefaults', '%bro_world_core.api_proxy.upload_defaults%');
 
     $services->set(ElasticsearchService::class)
         ->arg('$host', '%bro_world_core.elasticsearch.host%')
