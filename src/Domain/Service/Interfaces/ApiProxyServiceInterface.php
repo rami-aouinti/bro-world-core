@@ -13,12 +13,32 @@ use Throwable;
 interface ApiProxyServiceInterface
 {
     /**
+     * @param array<string, mixed> $body
+     * @param array<string, mixed> $options
+     *
      * @throws Throwable
      */
-    public function request(string $method, string $type, Request $request, array $body = [], string $path = ''): array;
+    public function request(
+        string $method,
+        string $type,
+        Request $request,
+        array $body = [],
+        string $path = '',
+        array $options = [],
+    ): array;
 
     /**
+     * @param array<string, mixed> $body
+     * @param array<string, mixed> $uploadOptions
+     *
      * @throws Throwable
      */
-    public function requestFile(string $method, string $type, Request $request, array $body = [], string $path = ''): array;
+    public function requestFile(
+        string $method,
+        string $type,
+        Request $request,
+        array $body = [],
+        string $path = '',
+        array $uploadOptions = [],
+    ): array;
 }

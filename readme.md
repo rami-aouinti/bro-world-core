@@ -68,6 +68,18 @@ bro_world_core:
       is_retryable: false
       # Waiting time (ms) between retries when using the custom RetryStrategy
       waiting_time: 0
+
+  api_proxy:
+    base_urls:
+      media: '%env(resolve:MEDIA_API_BASE_URL)%'
+    upload_defaults:
+      # Form field that will receive the resolved context value when uploading files
+      context_key_field: 'contextKey'
+      # Default form values can be provided (each request may override them)
+      workplace_id: '%env(default::WORKPLACE_ID)%'
+      private: true
+      extra_fields:
+        locale: '%locale%'
 ```
 
 > If you don’t need a given area (e.g. Messenger), you can omit it entirely.
@@ -104,6 +116,8 @@ The bundle uses PHP config to autowire/autoconfigure its own namespace and binds
 - `ExceptionSubscriber::$environment` ⟶ `%kernel.environment%`
 - `FailedRetry::$isRetryable` ⟶ `%bro_world_core.messenger.failed_retry.is_retryable%`
 - `FailedRetry::$retryWaitingTime` ⟶ `%bro_world_core.messenger.failed_retry.waiting_time%`
+- `ApiProxyService::$baseUrls` ⟶ `%bro_world_core.api_proxy.base_urls%`
+- `ApiProxyService::$uploadDefaults` ⟶ `%bro_world_core.api_proxy.upload_defaults%`
 
 If you need to override any of those in a particular app, you can redefine the service in that app’s `services.yaml`.
 
@@ -182,6 +196,41 @@ bro_world_core:
     failed_retry:
       is_retryable: true
       waiting_time: 5000  # 5s
+```
+
+### Configuring the API proxy
+```yaml
+# config/packages/bro_world_core.yaml
+bro_world_core:
+  api_proxy:
+    base_urls:
+      media: 'https://media.example.tld/api'
+      catalog: 'https://catalog.example.tld'
+    upload_defaults:
+      context_key_field: 'contextKey'
+      context_id: '%env(default::MEDIA_CONTEXT_ID)%'
+      media_folder: 'default'
+      private: false
+      headers:
+        X-Source: 'bro-world-core'
+```
+
+```php
+use Bro\WorldCoreBundle\Infrastructure\Service\ApiProxyService;
+use Symfony\Component\HttpFoundation\Request;
+
+final class ExampleUploader
+{
+    public function __construct(private ApiProxyService $proxy) {}
+
+    public function __invoke(Request $request): array
+    {
+        return $this->proxy->requestFile('POST', 'media', $request, [
+            'contextKey' => 'product-images',
+            'mediaFolder' => 'product-images',
+        ]);
+    }
+}
 ```
 
 ### Injecting the Clock service
