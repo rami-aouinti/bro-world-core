@@ -100,7 +100,6 @@ abstract class EnumType extends Type
      *
      * @codeCoverageIgnore
      */
-    #[Override]
     public function getName(): string
     {
         return '';
