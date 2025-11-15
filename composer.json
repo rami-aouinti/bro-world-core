@@ -28,7 +28,8 @@
                 "symfony/messenger": "^7.2",
                 "ramsey/uuid": "^4.6",
                 "ramsey/uuid-doctrine": "^2.1",
-                "elasticsearch/elasticsearch": "^8.15"
+                "elasticsearch/elasticsearch": "^8.15",
+                "mark-gerarts/automapper-plus-bundle": "^2.4"
         },
 	"suggest": {
 		"doctrine/orm": "^2.14 || ^3.0"
