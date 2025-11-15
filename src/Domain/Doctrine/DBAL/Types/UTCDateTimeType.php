@@ -47,7 +47,7 @@ class UTCDateTimeType extends DateTimeType
      * @throws Exception
      */
     #[Override]
-    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?\DateTime
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?DateTime
     {
         if ($value instanceof DateTime) {
             $value->setTimezone($this->getUtcDateTimeZone());
@@ -78,7 +78,7 @@ class UTCDateTimeType extends DateTimeType
      * @throws ConversionException
      * @throws Exception
      */
-    private function checkConvertedValue(string $value, AbstractPlatform $platform, ?\DateTime $converted): \DateTime
+    private function checkConvertedValue(string $value, AbstractPlatform $platform, ?DateTime $converted): DateTime
     {
         if ($converted instanceof DateTime) {
             return $converted;
