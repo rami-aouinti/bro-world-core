@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Bro\WorldCoreBundle\Domain\Doctrine\DBAL\Types;
 
 use DateTime;
-use DateTimeInterface;
 use DateTimeZone;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -28,7 +27,7 @@ class UTCDateTimeType extends DateTimeType
      * @throws ConversionException
      */
     #[Override]
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string
     {
         if ($value instanceof DateTime) {
             $value->setTimezone($this->getUtcDateTimeZone());
@@ -40,7 +39,7 @@ class UTCDateTimeType extends DateTimeType
     /**
      * @param T $value
      *
-     * @return (T is null ? null : DateTimeInterface)
+     * @return (T is null ? null : DateTime)
      *
      * @template T
      *
@@ -48,7 +47,7 @@ class UTCDateTimeType extends DateTimeType
      * @throws Exception
      */
     #[Override]
-    public function convertToPHPValue($value, AbstractPlatform $platform): DateTimeInterface|null
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?DateTime
     {
         if ($value instanceof DateTime) {
             $value->setTimezone($this->getUtcDateTimeZone());
